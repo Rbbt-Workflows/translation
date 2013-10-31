@@ -1,0 +1,7 @@
+translate=/$PWD filter="*.rb *.R *.js *.sass *.haml" {
+ workflow.rb
+ workflow.md
+ lib=lib {
+  translation.rb
+ }
+}
