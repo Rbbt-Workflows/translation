@@ -81,7 +81,7 @@ Workflow.require_workflow "Translation"
 jobs = []
 formats.each do |format|
   %w(Hsa Hsa/jun2011 Hsa/may2009 Hsa/jan2013).each do |organism|
-    jobs << Translation.job(:translate, "BOOTSTRAP", :list => genes.dup, :organism => organism, :format => format)
+    jobs << Translation.job(:translate, "BOOTSTRAP", :genes => genes.dup, :organism => organism, :format => format)
   end
 end
 
