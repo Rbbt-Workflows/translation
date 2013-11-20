@@ -70,7 +70,7 @@ module Translation
   input :proteins, :array, "Protein id list"
   def self.translate_protein(organism, format, proteins)
     index = protein_index(organism, format)
-    index.values_at(*proteins)
+    index.chunked_values_at(proteins)
   end
   task :translate_protein => :array
 
