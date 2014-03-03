@@ -7,7 +7,7 @@ require 'translation'
 module Translation
   extend Workflow
 
-  self::FORMATS = Organism.identifiers("Hsa").all_fields
+  self::FORMATS = Persist.persist("Translation identifiers", :array){ Organism.identifiers("Hsa").all_fields }
 
   desc "Translate gene ids to a particular format"
   input :organism, :string, "Organism code", "Hsa"
