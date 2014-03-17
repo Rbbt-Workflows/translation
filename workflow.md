@@ -23,6 +23,10 @@ important are:
   * UniProt/SwissProt ID
   * Entrez Gene ID
 
+## formats
+
+Output available identifier formats for a given organism
+
 ## transcript_to_protein
 Translate transcript to their corresponding protein ids
 
