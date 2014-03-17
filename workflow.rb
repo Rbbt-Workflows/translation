@@ -10,6 +10,12 @@ module Translation
   self::FORMATS = Persist.persist("Translation identifiers", :array){ Organism.identifiers("Hsa").all_fields }
 
   input :organism, :string, "Organism code", "Hsa"
+  def self.formats(organism)
+    Organism.identifiers(organism).all_fields
+  end
+  task :formats => :array
+
+  input :organism, :string, "Organism code", "Hsa"
   input :format, :select, "Target identifier format", "Ensembl Gene ID", :select_options => FORMATS
   input :genes, :array, "Gene id list"
   def self.translate(organism, format, genes)
@@ -56,7 +62,7 @@ module Translation
     tsv
   end
   task :tsv_translate_from => :tsv
-  export_exec :translate, :translate_from, :tsv_translate, :tsv_translate_from
+  export_exec :formats, :translate, :translate_from, :tsv_translate, :tsv_translate_from
 
   #{{{ Protein
   
