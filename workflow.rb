@@ -9,7 +9,6 @@ module Translation
 
   self::FORMATS = Persist.persist("Translation identifiers", :array){ Organism.identifiers("Hsa").all_fields }
 
-  desc "Translate gene ids to a particular format"
   input :organism, :string, "Organism code", "Hsa"
   input :format, :select, "Target identifier format", "Ensembl Gene ID", :select_options => FORMATS
   input :genes, :array, "Gene id list"
@@ -20,7 +19,6 @@ module Translation
   end
   task :translate => :array
 
-  desc "Translate gene ids to a particular format given in another format"
   input :organism, :string, "Organism code", "Hsa"
   input :target_format, :select, "Target identifier format", "Ensembl Gene ID", :select_options => FORMATS
   input :source_format, :select, "Source identifier format", "Ensembl Gene ID", :select_options => FORMATS
@@ -32,7 +30,6 @@ module Translation
   end
   task :translate_from => :array
 
-  desc "Translate gene ids to a particular format. Return TSV"
   input :organism, :string, "Organism code", "Hsa"
   input :format, :select, "Target identifier format", "Ensembl Gene ID", :select_options => FORMATS
   input :genes, :array, "Gene id list"
@@ -46,7 +43,6 @@ module Translation
   end
   task :tsv_translate => :tsv
 
-  desc "Translate gene ids to a particular format given in another format. Return TSV"
   input :organism, :string, "Organism code", "Hsa"
   input :target_format, :select, "Target identifier format", "Ensembl Gene ID", :select_options => FORMATS
   input :source_format, :select, "Source identifier format", "Ensembl Gene ID", :select_options => FORMATS
@@ -64,7 +60,6 @@ module Translation
 
   #{{{ Protein
   
-  desc "Translate protein ids to a particular format"
   input :organism, :string, "Organism code", "Hsa"
   input :format, :select, "Target identifier format", "Ensembl Protein ID", :select_options => FORMATS
   input :proteins, :array, "Protein id list"
@@ -74,7 +69,6 @@ module Translation
   end
   task :translate_protein => :array
 
-  desc "Translate protein ids to a particular format given in another format"
   input :organism, :string, "Organism code", "Hsa"
   input :target_format, :select, "Target identifier format", "Ensembl Protein ID", :select_options => FORMATS
   input :source_format, :select, "Source identifier format", "Ensembl Protein ID", :select_options => FORMATS
@@ -85,7 +79,6 @@ module Translation
   end
   task :translate_protein_from => :array
 
-  desc "Translate protein ids to a particular format. Return TSV"
   input :organism, :string, "Organism code", "Hsa"
   input :format, :select, "Target identifier format", "Ensembl Protein ID", :select_options => FORMATS
   input :proteins, :array, "Protein id list"
@@ -99,7 +92,6 @@ module Translation
   end
   task :tsv_translate_protein => :tsv
 
-  desc "Translate protein ids to a particular format given in another format. Return TSV"
   input :organism, :string, "Organism code", "Hsa"
   input :target_format, :select, "Target identifier format", "Ensembl Protein ID", :select_options => FORMATS
   input :source_format, :select, "Source identifier format", "Ensembl Protein ID", :select_options => FORMATS
@@ -117,7 +109,6 @@ module Translation
 
 
 
-  desc "Translate probe ids to a particular format"
   input :organism, :string, "Organism code", "Hsa"
   input :format, :select, "Target identifier format", "Ensembl Transcript ID", :select_options => FORMATS
   input :probes, :array, "Probe id list"
@@ -127,7 +118,6 @@ module Translation
   end
   task :translate_probe => :array
 
-  desc "Translate probe ids to a particular format given in another format"
   input :organism, :string, "Organism code", "Hsa"
   input :target_format, :select, "Target identifier format", "Ensembl Transcript ID", :select_options => FORMATS
   input :source_format, :select, "Source identifier format", "Ensembl Transcript ID", :select_options => FORMATS
@@ -138,7 +128,6 @@ module Translation
   end
   task :translate_probe_from => :array
 
-  desc "Translate probe ids to a particular format. Return TSV"
   input :organism, :string, "Organism code", "Hsa"
   input :format, :select, "Target identifier format", "Ensembl Transcript ID", :select_options => FORMATS
   input :probes, :array, "Probe id list"
@@ -152,7 +141,6 @@ module Translation
   end
   task :tsv_translate_probe => :tsv
 
-  desc "Translate probe ids to a particular format given in another format. Return TSV"
   input :organism, :string, "Organism code", "Hsa"
   input :target_format, :select, "Target identifier format", "Ensembl Transcript ID", :select_options => FORMATS
   input :source_format, :select, "Source identifier format", "Ensembl Transcript ID", :select_options => FORMATS
@@ -168,7 +156,6 @@ module Translation
   task :tsv_translate_probe_from => :tsv
 
 
-  desc "Translate transcript to their corresponding protein ids "
   input :organism, :string, "Organism code", "Hsa"
   input :transcripts, :array, "Ensembl Transcript ID"
   def self.transcript_to_protein(organism, transcripts)
