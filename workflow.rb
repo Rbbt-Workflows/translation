@@ -19,7 +19,7 @@ module Translation
   input :format, :select, "Target identifier format", "Ensembl Gene ID", :select_options => FORMATS
   input :genes, :array, "Gene id list"
   def self.translate(organism, format, genes)
-    raise ParameterException, "No genes given" if genes.nil? or genes.empty?
+    raise ParameterException, "No genes given" if genes.nil?
     index = index(organism, format)
     index.unnamed = true
     index.chunked_values_at(genes)
@@ -31,7 +31,7 @@ module Translation
   input :source_format, :select, "Source identifier format", "Ensembl Gene ID", :select_options => FORMATS
   input :genes, :array, "Gene id list"
   def self.translate_from(organism, format, source, genes)
-    raise ParameterException, "No genes given" if genes.nil? or genes.empty?
+    raise ParameterException, "No genes given" if genes.nil?
     index = index(organism, format, source)
     index.unnamed = true
     index.values_at(*genes)
@@ -42,7 +42,7 @@ module Translation
   input :format, :select, "Target identifier format", "Ensembl Gene ID", :select_options => FORMATS
   input :genes, :array, "Gene id list"
   def self.tsv_translate(organism, format, genes)
-    raise ParameterException, "No genes given" if genes.nil? or genes.empty?
+    raise ParameterException, "No genes given" if genes.nil?
     index = index(organism, format)
     tsv = TSV.setup({}, :key_field => "Gene", :fields => [format], :type => :single)
     genes.each do |gene|
@@ -57,7 +57,7 @@ module Translation
   input :source_format, :select, "Source identifier format", "Ensembl Gene ID", :select_options => FORMATS
   input :genes, :array, "Gene id list"
   def self.tsv_translate_from(organism, format, source, genes)
-    raise ParameterException, "No genes given" if genes.nil? or genes.empty?
+    raise ParameterException, "No genes given" if genes.nil? 
     index = index(organism, format, source)
     tsv = TSV.setup({}, :key_field => source, :fields => [format], :type => :single)
     genes.each do |gene|
@@ -74,7 +74,7 @@ module Translation
   input :format, :select, "Target identifier format", "Ensembl Protein ID", :select_options => FORMATS
   input :proteins, :array, "Protein id list"
   def self.translate_protein(organism, format, proteins)
-    raise ParameterException, "No proteins given" if proteins.nil? or proteins.empty?
+    raise ParameterException, "No proteins given" if proteins.nil?
     index = protein_index(organism, format)
     index.chunked_values_at(proteins)
   end
@@ -85,7 +85,7 @@ module Translation
   input :source_format, :select, "Source identifier format", "Ensembl Protein ID", :select_options => FORMATS
   input :proteins, :array, "Protein id list"
   def self.translate_protein_from(organism, format, source, proteins)
-    raise ParameterException, "No proteins given" if proteins.nil? or proteins.empty?
+    raise ParameterException, "No proteins given" if proteins.nil?
     index = protein_index(organism, format, source)
     index.values_at(*proteins)
   end
@@ -95,7 +95,7 @@ module Translation
   input :format, :select, "Target identifier format", "Ensembl Protein ID", :select_options => FORMATS
   input :proteins, :array, "Protein id list"
   def self.tsv_translate_protein(organism, format, proteins)
-    raise ParameterException, "No proteins given" if proteins.nil? or proteins.empty?
+    raise ParameterException, "No proteins given" if proteins.nil?
     index = protein_index(organism, format)
     tsv = TSV.setup({}, :key_field => "Protein", :fields => [format])
     proteins.each do |protein|
@@ -110,7 +110,7 @@ module Translation
   input :source_format, :select, "Source identifier format", "Ensembl Protein ID", :select_options => FORMATS
   input :proteins, :array, "Protein id list"
   def self.tsv_translate_protein_from(organism, target, source, proteins)
-    raise ParameterException, "No proteins given" if proteins.nil? or proteins.empty?
+    raise ParameterException, "No proteins given" if proteins.nil?
     index = protein_index(organism, target, source)
     tsv = TSV.setup({}, :key_field => source, :fields => [target])
     proteins.each do |protein|
@@ -127,7 +127,7 @@ module Translation
   input :format, :select, "Target identifier format", "Ensembl Transcript ID", :select_options => FORMATS
   input :probes, :array, "Probe id list"
   def self.translate_probe(organism, format, probes)
-    raise ParameterException, "No probes given" if probes.nil? or probes.empty?
+    raise ParameterException, "No probes given" if probes.nil?
     index = probe_index(organism, format)
     index.values_at(*probes)
   end
@@ -138,7 +138,7 @@ module Translation
   input :source_format, :select, "Source identifier format", "Ensembl Transcript ID", :select_options => FORMATS
   input :probes, :array, "Probe id list"
   def self.translate_probe_from(organism, format, source, probes)
-    raise ParameterException, "No probes given" if probes.nil? or probes.empty?
+    raise ParameterException, "No probes given" if probes.nil?
     index = probe_index(organism, format, source)
     index.values_at(*probes)
   end
@@ -148,7 +148,7 @@ module Translation
   input :format, :select, "Target identifier format", "Ensembl Transcript ID", :select_options => FORMATS
   input :probes, :array, "Probe id list"
   def self.tsv_translate_probe(organism, format, probes)
-    raise ParameterException, "No probes given" if probes.nil? or probes.empty?
+    raise ParameterException, "No probes given" if probes.nil?
     index = probe_index(organism, format)
     tsv = TSV.setup({}, :key_field => "Transcript", :fields => [format])
     probes.each do |probe|
@@ -163,7 +163,7 @@ module Translation
   input :source_format, :select, "Source identifier format", "Ensembl Transcript ID", :select_options => FORMATS
   input :probes, :array, "Probe id list"
   def self.tsv_translate_probe_from(organism, target, source, probes)
-    raise ParameterException, "No probes given" if probes.nil? or probes.empty?
+    raise ParameterException, "No probes given" if probes.nil?
     index = probe_index(organism, target, source)
     tsv = TSV.setup({}, :key_field => source, :fields => [target])
     probes.each do |probe|
@@ -177,7 +177,7 @@ module Translation
   input :organism, :string, "Organism code", "Hsa"
   input :transcripts, :array, "Ensembl Transcript ID"
   def self.transcript_to_protein(organism, transcripts)
-    raise ParameterException, "No transcripts given" if transcripts.nil? or transcripts.empty?
+    raise ParameterException, "No transcripts given" if transcripts.nil? 
     index = transcript_to_protein_index(organism)
 
     index.values_at(*transcripts)
