@@ -23,6 +23,8 @@ important are:
   * UniProt/SwissProt ID
   * Entrez Gene ID
 
+The main tasks are: `translate`, and `translate_tsv`
+
 ## formats
 
 Output available identifier formats for a given organism
