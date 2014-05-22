@@ -44,11 +44,11 @@ module Translation
   def self.tsv_translate(organism, format, genes)
     raise ParameterException, "No genes given" if genes.nil?
     index = index(organism, format)
-    tsv = TSV.setup({}, :key_field => "Gene", :fields => [format], :type => :single)
+    tsv = {}
     genes.each do |gene|
       tsv[gene] = index[gene]
     end
-    tsv
+    TSV.setup(tsv, :key_field => "Gene", :fields => [format], :type => :single, :namespace => organism)
   end
   task :tsv_translate => :tsv
 
