@@ -68,6 +68,22 @@ module Translation
   task :tsv_translate_from => :tsv
   export_exec :formats, :translate, :translate_from, :tsv_translate, :tsv_translate_from
 
+
+  input :organism, :string, "Organism code", "Hsa"
+  input :source_format, :select, "Source identifier format", "Ensembl Gene ID", :select_options => FORMATS
+  input :target_format, :select, "Target identifier format", "Ensembl Gene ID", :select_options => FORMATS
+  input :genes, :array, "Gene id list"
+  def self.tsv_translate_multiple(organism, source_format, target_format, genes)
+    raise ParameterException, "No genes given" if genes.nil?
+    index = index_flat(organism, target_format, source_format)
+    tsv = {}
+    genes.each do |gene|
+      tsv[gene] = index[gene]
+    end
+    TSV.setup(tsv, :key_field => source_format, :fields => [target_format], :type => :flat, :namespace => organism)
+  end
+  task :tsv_translate_multiple => :tsv
+
   #{{{ Protein
   
   input :organism, :string, "Organism code", "Hsa"
@@ -184,5 +200,6 @@ module Translation
   end
   task :transcript_to_protein => :array
   
-  export_exec :translate_probe, :translate_probe_from, :tsv_translate_probe, :tsv_translate_probe_from, :transcript_to_protein
+  export_exec :translate_probe, :translate_probe_from, :tsv_translate_probe, :tsv_translate_probe_from, :transcript_to_protein, :tsv_translate_multiple
+
 end

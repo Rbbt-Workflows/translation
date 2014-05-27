@@ -1,5 +1,14 @@
 module Translation
 
+  def self.index_flat(organism, target, source = nil)
+    key = [organism, target, source]
+    @@index_flat ||= {}
+    if @@index_flat[key].nil?
+      @@index_flat[key] = Organism.identifiers(organism).tsv(:data_grep => "^LRG_", :data_invert_grep => true, :key_field => source, :persist => true, :order => true, :unnamed => true, :data_persist => true, :fields => [target], :type => :flat)
+    end
+    @@index_flat[key]
+  end
+
   def self.index(organism, target, source = nil)
     key = [organism, target, source]
     @@index ||= {}

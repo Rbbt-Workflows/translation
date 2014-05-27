@@ -56,6 +56,10 @@ Translate gene ids to a particular format. Return TSV
 ## tsv_translate_from
 Translate gene ids to a particular format given in another format. Return TSV
 
+## tsv_translate_multiple
+Translate gene ids to a particular format given in another format. Return TSV
+with multiple results
+
 ## tsv_translate_probe
 Translate probe ids to a particular format. Return TSV
 
