@@ -80,16 +80,15 @@ Workflow.require_workflow "Translation"
 
 jobs = []
 formats.each do |format|
-  %w(Hsa Hsa/jun2011 Hsa/may2009 Hsa/jan2013).each do |organism|
-    jobs << Translation.job(:translate, "BOOTSTRAP", :genes => genes.dup, :organism => organism, :format => format)
+  Organism.organism_codes.each do |organism|
+      jobs << Translation.job(:translate, "BOOTSTRAP-#{organism}", :genes => genes.dup, :organism => organism, :format => format)
   end
 end
 
 jobs.shuffle!
-
-procs = ARGV.shift || "1"
+procs = ARGV.shift 
 require 'rbbt/util/semaphore'
-RbbtSemaphore.fork_each_on_semaphore(jobs, procs.to_i) do |job|
-  job.run(true)
+Misc.bootstrap(jobs, procs) do |job|
+  job.run
 end
 

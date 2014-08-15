@@ -7,7 +7,7 @@ require 'translation'
 module Translation
   extend Workflow
 
-  self::FORMATS = Persist.persist("Translation identifiers", :array){ Organism.identifiers("Hsa").all_fields }
+  self::FORMATS = File.exists?(Organism.identifiers("Hsa").find) ? Persist.persist("Translation identifiers", :array){ Organism.identifiers("Hsa").all_fields } : [] 
 
   input :organism, :string, "Organism code", "Hsa"
   def self.formats(organism)

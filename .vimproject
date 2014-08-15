@@ -7,6 +7,6 @@ translate=/$PWD filter="*.rb *.R *.js *.sass *.haml" {
  share=share{
   rbbt_commands=rbbt_commands filter="*"{
    bootstrap
-   }
+  }
  }
 }
