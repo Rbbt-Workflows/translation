@@ -1,0 +1,16 @@
+- table_id = [workflow.to_s, task, jobname] * "_"
+- table_class = 'workflow_tsv_result'
+- begin
+  - page = result.size > 50 ? "1" : nil
+- rescue
+  - page = "1" 
+
+- rows, total_size = tsv_rows(result, page)
+- entity_options = {}
+- result.fields.each do |field|
+  - entity_options[field] = ["NOENTITY", {}]
+
+= workflow_partial('partials/table', workflow, task, 
+  locals.merge(:table_id => table_id, :table_options => {:unnamed =>true},
+  :page => page, :table_class => table_class, :rows => rows, :total_size => total_size, :header => result.all_fields, 
+  :row_ids => :use, :table_url => jobname ? File.join('/', workflow.to_s, task, jobname) : nil))

@@ -9,4 +9,10 @@ translate=/$PWD filter="*.rb *.R *.js *.sass *.haml" {
    bootstrap
   }
  }
+ www=www{
+  views=views{
+   job_result=job_result{
+    tsv.haml
+   }
+ }
 }
