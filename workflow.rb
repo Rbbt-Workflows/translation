@@ -45,8 +45,8 @@ module Translation
     raise ParameterException, "No genes given" if genes.nil?
     index = index(organism, format)
     tsv = {}
-    genes.each do |gene|
-      tsv[gene] = index[gene]
+    TSV.traverse genes, :type => :array, :into => tsv do |gene|
+      [gene, index[gene]]
     end
     TSV.setup(tsv, :key_field => "Gene", :fields => [format], :type => :single, :namespace => organism)
   end
