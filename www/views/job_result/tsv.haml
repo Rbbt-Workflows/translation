@@ -6,9 +6,6 @@
   - page = "1" 
 
 - rows, total_size = tsv_rows(result, page)
-- entity_options = {}
-- result.fields.each do |field|
-  - entity_options[field] = ["NOENTITY", {}]
 
 = workflow_partial('partials/table', workflow, task, 
   locals.merge(:table_id => table_id, :table_options => {:unnamed =>true},
