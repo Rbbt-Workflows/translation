@@ -89,6 +89,6 @@ jobs.shuffle!
 procs = ARGV.shift 
 require 'rbbt/util/semaphore'
 Misc.bootstrap(jobs, procs) do |job|
-  job.run
+  job.produce
 end
 
