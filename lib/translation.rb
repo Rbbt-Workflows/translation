@@ -13,10 +13,11 @@ module Translation
     key = [organism, target, source]
     @@index ||= {}
     if @@index[key].nil?
+      grep = Organism.blacklist_genes(organism).list 
       if source.nil?
-        @@index[key] = Organism.identifiers(organism).index(:data_grep => "^LRG_", :data_invert_grep => true, :target => target, :persist => true, :order => true, :unnamed => true, :data_persist => true)
+        @@index[key] = Organism.identifiers(organism).index(:data_tsv_grep => grep, :data_invert_grep => true, :target => target, :persist => true, :order => true, :unnamed => true, :data_persist => true)
       else
-        @@index[key] = Organism.identifiers(organism).index(:data_grep => "^LRG_", :data_invert_grep => true, :target => target, :fields => [source], :persist => true, :order => true, :unnamed => true, :data_persist => true)
+        @@index[key] = Organism.identifiers(organism).index(:data_tsv_grep => grep, :data_invert_grep => true, :target => target, :fields => [source], :persist => true, :order => true, :unnamed => true, :data_persist => true)
       end
     end
     @@index[key]
@@ -27,9 +28,9 @@ module Translation
     @@protein_index ||= {}
     if @@protein_index[key].nil?
       if source.nil?
-        @@protein_index[key] = Organism.protein_identifiers(organism).index(:data_grep => "^LRG_", :data_invert_grep => true, :target => target, :persist => true, :order => true, :unnamed => true, :data_persist => true)
-      else                                                                                                          
-        @@protein_index[key] = Organism.protein_identifiers(organism).index(:data_grep => "^LRG_", :data_invert_grep => true, :target => target, :fields => [source], :persist => true, :order => true, :unnamed => true, :data_persist => true)
+        @@protein_index[key] = Organism.protein_identifiers(organism).index(:data_tsv_grep => "^LRG_", :data_invert_grep => true, :target => target, :persist => true, :order => true, :unnamed => true, :data_persist => true)
+      else                                                                        tsv_                                  
+        @@protein_index[key] = Organism.protein_identifiers(organism).index(:data_tsv_grep => "^LRG_", :data_invert_grep => true, :target => target, :fields => [source], :persist => true, :order => true, :unnamed => true, :data_persist => true)
       end
       @@protein_index[key].unnamed = true
     end
