@@ -42,9 +42,9 @@ module Translation
     @@probe_index ||= {}
     if @@probe_index[key].nil?
       if source.nil?
-        @@probe_index[key] = Organism.probe_transcripts(organism).index(:data_grep => "^LRG_", :data_invert_grep => true, :target => target, :persist => true, :order => true, :unnamed => true, :data_persist => true)
+        @@probe_index[key] = Organism.transcript_probes(organism).index(:data_grep => "^LRG_", :data_invert_grep => true, :target => target, :persist => true, :order => true, :unnamed => true, :data_persist => true)
       else
-        @@probe_index[key] = Organism.probe_transcripts(organism).index(:data_grep => "^LRG_", :data_invert_grep => true, :target => target, :fields => [source], :persist => true, :order => true, :unnamed => true, :data_persist => true)
+        @@probe_index[key] = Organism.transcript_probes(organism).index(:data_grep => "^LRG_", :data_invert_grep => true, :target => target, :fields => [source], :persist => true, :order => true, :unnamed => true, :data_persist => true)
       end
       @@probe_index[key].unnamed = true
     end
