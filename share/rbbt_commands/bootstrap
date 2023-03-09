@@ -78,9 +78,10 @@ require 'rbbt/workflow'
 
 Workflow.require_workflow "Translation"
 
+organism_codes = %w(b37 hg38).collect{|b| Organism.organism_for_build(b) }
 jobs = []
 formats.each do |format|
-  Organism.organism_codes.each do |organism|
+  organism_codes.each do |organism|
       jobs << Translation.job(:translate, "BOOTSTRAP-#{organism}", :genes => genes.dup, :organism => organism, :format => format)
   end
 end
