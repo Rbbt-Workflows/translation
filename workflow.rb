@@ -11,7 +11,7 @@ module Translation
     Organism.default_code("Hsa")
   end
 
-  self::FORMATS = File.exists?(Organism.identifiers(self.default_organism).find) ? Persist.persist("Translation identifiers", :array){ Organism.identifiers(self.default_organism).all_fields } : [] 
+  self::FORMATS = File.exist?(Organism.identifiers(self.default_organism).find) ? Persist.persist("Translation identifiers", :array){ Organism.identifiers(self.default_organism).all_fields } : [] 
 
   input :organism, :string, "Organism code", self.default_organism
   def self.formats(organism)
